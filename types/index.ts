@@ -41,6 +41,8 @@ export interface RawProduct {
   name_en?: string;
   img?: string;
   price?: string;
+  /** Optional EN-formatted price, e.g. "$350 / 6h" */
+  price_en?: string;
   descriptions?: string;
   descriptions_en?: string;
   varning?: string;

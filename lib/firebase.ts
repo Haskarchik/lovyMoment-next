@@ -83,7 +83,7 @@ function normalise(raw: any, locale: Locale): Product | null {
     id,
     name,
     img: (row.img ?? '').toString(),
-    price: (row.price ?? '').toString(),
+    price: pickLocale(row, 'price', locale) || (row.price ?? '').toString(),
     descriptions: pickLocale(row, 'descriptions', locale),
     varning: pickLocale(row, 'varning', locale),
     video: (row.video ?? '').toString(),
@@ -98,18 +98,63 @@ function normalise(raw: any, locale: Locale): Product | null {
 }
 
 /**
+ * Fetch the raw product list from RTDB. Products live at root (numeric keys
+ * 0, 1, 2…), with non-product meta (e.g. `/admins`) sitting alongside as
+ * named keys. The `/products` bucket is read too for backward-compatibility
+ * with any DB still in the transient migration state.
+ */
+async function readRawList(): Promise<unknown[]> {
+  const collected: unknown[] = [];
+
+  const rootSnap = await get(ref(db()));
+  if (rootSnap.exists()) {
+    const val = rootSnap.val();
+    if (Array.isArray(val)) {
+      for (const v of val) if (v) collected.push(v);
+    } else if (val && typeof val === 'object') {
+      for (const [k, v] of Object.entries(val as Record<string, unknown>)) {
+        if (k === 'admins') continue;
+        if (k === 'products') continue;
+        if (v && typeof v === 'object') collected.push(v);
+      }
+    }
+  }
+
+  // Legacy fallback: products may briefly live under `/products` after an
+  // earlier migration attempt. Read them and merge.
+  const productsSnap = await get(ref(db(), 'products'));
+  if (productsSnap.exists()) {
+    const val = productsSnap.val();
+    if (Array.isArray(val)) {
+      for (const v of val) if (v) collected.push(v);
+    } else if (val && typeof val === 'object') {
+      for (const v of Object.values(val as Record<string, unknown>)) {
+        if (v) collected.push(v);
+      }
+    }
+  }
+
+  // De-duplicate by id (string match).
+  const seen = new Set<string>();
+  return collected.filter((entry) => {
+    if (!entry || typeof entry !== 'object') return false;
+    const id = (entry as { id?: unknown }).id;
+    if (typeof id !== 'string' || !id) return false;
+    if (seen.has(id)) return false;
+    seen.add(id);
+    return true;
+  });
+}
+
+/**
  * One-shot fetch of all products, resolved into the requested locale.
  * Cached by Next.js's data cache when called from a server component with
  * `revalidate` set on the route.
  */
 export async function getAllProducts(locale: Locale = DEFAULT_LOCALE): Promise<Product[]> {
-  const snapshot = await get(ref(db()));
-  if (!snapshot.exists()) return [];
-  const raw = snapshot.val() as Record<string, unknown> | unknown[];
-  // RTDB returns either an array (numeric keys 0..n) or a plain object —
-  // Object.values handles both shapes uniformly.
+  const raws = await readRawList();
   const products: Product[] = [];
-  for (const value of Object.values(raw as object)) {
+  for (const value of raws) {
     const p = normalise(value, locale);
     if (p) products.push(p);
   }

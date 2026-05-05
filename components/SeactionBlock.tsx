@@ -48,12 +48,20 @@ const ALT_BY_LOCALE: Record<Locale, Record<string, string>> = {
     animators: 'Animators in Lviv for kids parties',
     food: 'Catering — cotton candy, popcorn, drinks',
     other: 'Event equipment in Lviv'
+  },
+  pl: {
+    atractions: 'Atrakcje we Lwowie — dmuchane zjeżdżalnie i trampoliny',
+    megagame: 'Gry i aktywności we Lwowie',
+    animators: 'Animatorzy we Lwowie na imprezy dziecięce',
+    food: 'Catering — wata cukrowa, popcorn, napoje',
+    other: 'Wyposażenie imprezowe we Lwowie'
   }
 };
 
 const SECTION_ARIA: Record<Locale, string> = {
   uk: 'Категорії послуг',
-  en: 'Service categories'
+  en: 'Service categories',
+  pl: 'Kategorie usług'
 };
 
 export function SeactionBlock({ locale }: SeactionBlockProps) {
@@ -64,14 +72,16 @@ export function SeactionBlock({ locale }: SeactionBlockProps) {
         {CARDS.map((card) => (
           <Link key={card.link} href={localePath(locale, `/${card.link}`)}>
             <div className={`${seactionBlockStyles.filter_card} ${seactionBlockStyles[card.cardModifier] ?? ''}`}>
-              <Image
-                src={`/img/categories/${card.imgFile}`}
-                alt={ALT_BY_LOCALE[locale]?.[card.link] ?? card.link}
-                width={170}
-                height={150}
-                style={{ objectFit: 'contain' }}
-                unoptimized
+              <div className={seactionBlockStyles.card_img}>
+                <Image
+                  src={`/img/categories/${card.imgFile}`}
+                  alt={ALT_BY_LOCALE[locale]?.[card.link] ?? card.link}
+                  width={card.cardModifier === 'game' ? 220 : 180}
+                  height={160}
+                  style={{ objectFit: 'contain' }}
+                
               />
+              </div>
               <div className={seactionBlockStyles.card_label}>
                 <div className={`${seactionBlockStyles.card_title} ${seactionBlockStyles[card.titleModifier] ?? ''}`}>
                   {dict.categories[card.link] ?? card.link}

@@ -131,6 +131,155 @@ public/                   ← logos, icons, category cards, About-Us photos
 - [x] hreflang alternates wired up via `Metadata.alternates.languages`
 - [x] Static generation + ISR (`revalidate = 600`) for snappy TTFB
 
+## Admin panel (`/admin`)
+
+A Google-auth gated admin lives at `/admin`. From there you can:
+
+- view every product (live from Firebase RTDB)
+- create / edit / delete products
+- upload photos directly to Firebase Storage (drag-and-drop)
+- preview the product page **side-by-side** with the form (UK + EN tabs)
+
+### Setting up access
+
+The admin whitelist is split in two:
+
+- **Root admins** — set in `.env.local` via `NEXT_PUBLIC_ROOT_ADMIN_EMAILS`.
+  These accounts are always allowed in and *cannot* be removed via the UI.
+  Treat this list as the recovery key — only the people deploying the app
+  belong here.
+
+- **Stored admins** — managed live from `/admin/admins`. Stored in Firebase
+  RTDB under `/admins/<emailEscaped>: true`. Adding or removing a stored
+  admin takes effect on next sign-in (or after the AuthProvider refresh).
+
+#### One-time setup
+
+1. **Bootstrap the root admin.** In `.env.local`:
+
+   ```
+   NEXT_PUBLIC_ROOT_ADMIN_EMAILS=pavlo@clasify.com
+   ```
+
+2. **Enable Google sign-in** — Firebase Console →
+   *Authentication → Sign-in method → Google → Enable*.
+
+3. **RTDB security rules** — Firebase Console → *Realtime Database → Rules*:
+
+   ```json
+   {
+     "rules": {
+       ".read": true,
+       ".write": "auth != null && auth.token.email_verified == true && (root.child('admins').child(auth.token.email.replace('.', ',')).exists() || auth.token.email == 'pavlo@clasify.com')",
+       "admins": {
+         ".read": "auth != null"
+       }
+     }
+   }
+   ```
+
+   The root-level `.write` lets admins write/clean up anything in the tree
+   (including the one-time cleanup that drops legacy numeric-keyed
+   product entries during migration). The override on `/admins` keeps the
+   whitelist invisible to anonymous visitors.
+
+   Replace `pavlo@clasify.com` with whatever's in your
+   `NEXT_PUBLIC_ROOT_ADMIN_EMAILS`. The `auth.token.email.replace('.', ',')`
+   trick maps an email to a Firebase-safe key (RTDB keys can't contain `.`).
+
+4. **Storage rules** — Firebase Console → *Storage → Rules*:
+
+   ```
+   rules_version = '2';
+   service firebase.storage {
+     match /b/{bucket}/o {
+       match /products/{allPaths=**} {
+         allow read: if true;
+         allow write: if request.auth != null
+                      && request.auth.token.email_verified == true
+                      && (request.auth.token.email == 'pavlo@clasify.com'
+                          || exists(/databases/(default)/documents/_dummy));
+       }
+     }
+   }
+   ```
+
+   (Storage rules can't read RTDB directly. Either repeat the explicit
+   email list as `||` clauses, or — recommended — use Firestore for the
+   admin list and storage rules can call `exists(/databases/.../admins/{uid})`.
+   Simplest practical setup: keep your root admin emails in this storage
+   rule and let RTDB handle granular admin management.)
+
+5. **Migrate existing data** (one-off). The legacy DB stored every product
+   at the root. The new schema uses `/products`. The first time an admin
+   saves anything, code writes to `/products` automatically — but to fully
+   clean up, in Firebase Console → Realtime Database, copy the root array
+   to `/products` and then delete the numeric-keyed entries at root.
+
+6. Open `https://your-site/admin`, sign in with Google, edit away.
+   `/admin` is excluded from `robots.txt` and marked `noindex`.
+
+#### Per-admin permissions
+
+Each stored admin has a granular permission object instead of a flat
+"yes/no" flag. Available capabilities:
+
+| Capability        | What it unlocks in the UI                                |
+|-------------------|----------------------------------------------------------|
+| `canEdit`         | Create new products, edit existing ones, save the form   |
+| `canDelete`       | "Видалити" button on the product list / edit page        |
+| `canUpload`       | Drag-and-drop image uploads to Firebase Storage          |
+| `canManageAdmins` | Access `/admin/admins` and toggle others' permissions    |
+
+Root admins (env list) always have **all** capabilities and cannot be
+edited via the UI. Stored admins can have any combination — useful for
+"translator" accounts (`canEdit` only, no delete/upload), "moderator"
+accounts (`canDelete` but no admin management), etc.
+
+Granular permissions are enforced **client-side**: the corresponding
+buttons / form fields disappear or become read-only. RTDB security rules
+still gate writes at the wire level — anyone bypassing the client guard
+gets a permission-denied error from Firebase. For maximum hardening, the
+RTDB rules below restrict writes to the *admins* collection.
+
+#### DB layout
+
+Products live at the root with numeric keys (0, 1, 2…). The admin
+whitelist is a sibling object keyed `admins`:
+
+```
+{
+  "0":  { "id": "Minion-7", "name": "...", "name_en": "...", ... },
+  "1":  { "id": "Krabs",    "name": "...", ... },
+  …,
+  "admins": {
+    "pavlo@clasify,com":      { "canEdit": true, "canDelete": true,  "canUpload": true,  "canManageAdmins": true  },
+    "translator@example,com": { "canEdit": true, "canDelete": false, "canUpload": false, "canManageAdmins": false }
+  }
+}
+```
+
+Every admin save rewrites the whole root atomically: products are placed
+under numeric keys and `admins` is preserved exactly. Earlier transient
+shapes (a `/products` bucket, legacy boolean admin entries) are absorbed
+on read and tidied up on the next save — no migration script needed.
+
+### How edits flow
+
+```
+[Form (client component)]
+     ↓ on save
+adminUpdateProduct() / adminCreateProduct()  in lib/admin-db.ts
+     ↓
+firebase/database `set(ref(db), [...rows])`
+     ↓
+Public site picks up changes on next ISR revalidate (≤10 min).
+```
+
+For images: every drop/click upload goes straight to
+`products/<productId>/<timestamp>-<filename>` in Storage; the resulting
+download URL is written into the product's `img` or `albom` field.
+
 ## Multilingual data schema
 
 Localised product fields use a `<field>_<locale>` suffix in Firebase RTDB.
@@ -144,6 +293,9 @@ Example row (mixed UK + EN):
   "id": "Minion-7",
   "name": "Надувна гірка \"Мега Посіпаки\"",
   "name_en": "Mega Minions inflatable slide",
+
+  "price":    "13800 грн / 6 год",
+  "price_en": "$350 / 6h",
 
   "descriptions":    "Розміри: 16м × 8м × 12м, до 13 дітей одночасно",
   "descriptions_en": "Dimensions: 16m × 8m × 12m, up to 13 kids at once",
