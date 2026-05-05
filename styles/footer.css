@@ -1,0 +1,233 @@
+.container {
+  max-width: 1390px;
+  margin: auto;
+}
+
+.footer {
+  margin-top: 80px;
+  background-color: #4f66cf;
+  color: #ffffff;
+}
+
+.footer-row {
+  padding-top: 65px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.footer-infp-label {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 40px;
+  margin-bottom: 30px;
+}
+
+.phone-number {
+  font-family: "Rubik";
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  text-decoration: none;
+  color: #4f66cf;
+  background-color: #ffffff;
+  padding: 15px 40px;
+  border-radius: 24px;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+
+.phone-number:hover {
+  background-color: #8b9df0;
+  color: #ffffff;
+}
+
+.footer-info-text {
+  margin-top: 34px;
+}
+
+.footer-text {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.footer-socials {
+  max-width: 690px;
+  margin-bottom: 240px;
+}
+
+.footer-socials-text {
+  margin-left: 15px;
+  margin-bottom: 30px;
+}
+
+.footer-socials-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.footer-socials-list li {
+  font-family: "Rubik";
+  margin: 12px;
+  width: 320px;
+  background-color: #7085e4;
+  border-radius: 24px;
+}
+
+.footer-socials-list li a {
+  padding: 15px 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.footer-socials-list li a img {
+  margin-right: 15px;
+}
+
+.footer-socials-list li:hover {
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+  background-color: #8b9df0;
+}
+
+/* ------- Language toggle pill (outlined, distinct from socials) ------- */
+.footer-socials-list li.footer-locale-pill {
+  background-color: #7085e4;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.footer-socials-list li.footer-locale-pill:hover {
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+  background-color: #8b9df0;
+}
+
+.footer-socials-list li.footer-locale-pill a {
+  padding: 13px 22px;
+}
+
+.footer-locale-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.footer-locale-name {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.footer-locale-sub {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  opacity: 0.72;
+}
+
+
+/************************************/
+@media (max-width: 768px) {
+  .footer-socials-list {
+    width: 320px;
+  }
+}
+
+@media (max-width: 500px) {
+  .footer-row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .footer-info-text {
+    display: none;
+  }
+  .footer-info {
+    text-align: center;
+  }
+  .footer-infp-label {
+    margin-bottom: 50px;
+  }
+  .footer-infp-label span {
+    display: none;
+  }
+  .footer-socials {
+    margin-top: 50px;
+    text-align: center;
+  }
+  .footer-socials-list {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .footer-socials-list li {
+    width: 300px;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .footer-socials-text {
+    margin-bottom: 15px;
+  }
+}
+
+/************************************/
+.mobile-call {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .mobile-call {
+    display: block;
+    z-index: 5;
+    background-color: #5bd262;
+    border-radius: 50%;
+    position: fixed;
+    padding: 25px;
+    top: 80%;
+    left: 70%;
+    border: 4px solid #78e87e;
+  }
+  .mobile-call img {
+    height: 30px;
+    width: 30px;
+  }
+  .container {
+    padding: 0px;
+  }
+}
+
+@media (max-width: 325px) {
+  .phone-number {
+    padding: 15px 35px;
+  }
+}
+/*# sourceMappingURL=footer.css.map */

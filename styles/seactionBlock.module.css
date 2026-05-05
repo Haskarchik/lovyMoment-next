@@ -1,0 +1,193 @@
+.container {
+  max-width: 1390px;
+  margin: auto;
+  padding: 0px 5px;
+}
+
+.main_filter {
+  margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.main_filter a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.filter_card {
+  text-shadow: 1px 1px 1px black;
+  margin: 15px 12px;
+  overflow: hidden;
+  height: 170px;
+  width: 320px;
+  background: #4f66cf;
+  color: #ffffff;
+  border-radius: 32px;
+  position: relative;
+  position: relative;
+  -webkit-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+}
+
+.filter_card img {
+  z-index: 1;
+}
+
+.filter_card:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+  -webkit-box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.card_label {
+  position: absolute;
+  z-index: 2;
+  top: 120px;
+  margin-left: 30px;
+}
+
+.text {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.card_title {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  position: relative;
+}
+
+.card_title::before,
+.card_title::after {
+  content: "";
+  height: 4px;
+  width: 13px;
+  background-color: white;
+  position: absolute;
+}
+
+.card_title::before {
+  top: 8px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  left: 245px;
+}
+
+.card_title::after {
+  top: 16px;
+  left: 245px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.corporate {
+  background-color: #fc992c;
+}
+
+.festival {
+  background-color: #5bd262;
+}
+
+.trampoline {
+  background-color: #ACC220;
+}
+
+.trampoline .card_title {
+  width: 200px;
+  margin-top: -10px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.promotion {
+  background-color: #f8d37c;
+  color: white;
+}
+
+.animators {
+  top: -10px;
+  left: -5px;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+
+.animators::before {
+  top: 35px;
+}
+
+.animators::after {
+  top: 42px;
+}
+
+.game {
+  background-color: #E55BA0;
+}
+
+.game .card_title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.carousel {
+  font-size: 24px;
+  line-height: 28px;
+  background-color: #F65D5C;
+}
+
+.food {
+  background-color: #8B5E4D;
+}
+
+.food .card_title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.about {
+  background-color: #7d48db;
+}
+
+.about .card_title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+@media (max-width: 768px) {
+  .main_filter {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media (max-width: 425px) {
+  .text {
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 0px;
+  }
+  .main_filter {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .filter_card {
+    margin: 15px 0px;
+  }
+}

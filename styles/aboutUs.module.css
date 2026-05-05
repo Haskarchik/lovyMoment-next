@@ -1,0 +1,438 @@
+.container {
+  max-width: 1390px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* Hero Section */
+.hero_section {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 80px;
+  margin-top: 40px;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #4f66cf 0%, #7085e4 100%);
+  border-radius: 32px;
+  color: white;
+}
+
+.hero_content {
+  flex: 1;
+  padding-left: 60px;
+}
+
+.main_title {
+  font-family: "Rubik";
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 72px;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero_text {
+  font-family: "Rubik";
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  opacity: 0.95;
+}
+
+.hero_image {
+  flex: 1;
+  padding-right: 60px;
+}
+
+.hero_image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: 100% 40%;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Section Titles */
+.section_title {
+  font-family: "Rubik";
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+  color: #4f66cf;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Services Section */
+.services_section {
+  margin: 80px 0;
+}
+
+.services_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.service_card {
+  background: white;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(79, 102, 207, 0.1);
+  border: 2px solid #f0f2ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(79, 102, 207, 0.2);
+}
+
+.service_card h3 {
+  font-family: "Rubik";
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #4f66cf;
+  margin-bottom: 15px;
+}
+
+.service_card p {
+  font-family: "Rubik";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333;
+}
+
+/* Experience Section */
+.experience_section {
+  margin: 80px 0;
+  background: #f8f9ff;
+  padding: 60px 0;
+  border-radius: 32px;
+}
+
+.experience_content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.experience_text {
+  flex: 1;
+  padding-left: 60px;
+}
+
+.experience_item {
+  margin-bottom: 30px;
+}
+
+.highlight {
+  font-family: "Rubik";
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 32px;
+  color: #4f66cf;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.experience_item p {
+  font-family: "Rubik";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333;
+}
+
+.experience_image {
+  flex: 1;
+  padding-right: 60px;
+}
+
+.experience_image img {
+  width: 100%;
+  height: 350px;
+  object-fit:cover;
+  /* object-position: 100% 30%; */
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Values Section */
+.values_section {
+  margin: 80px 0;
+}
+
+.values_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.value_card {
+  background: linear-gradient(135deg, #f97caf 0%, #ff8cc8 100%);
+  color: white;
+  padding: 40px;
+  border-radius: 24px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.value_card:hover {
+  transform: translateY(-5px);
+}
+
+.value_card h3 {
+  font-family: "Rubik";
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.value_card p {
+  font-family: "Rubik";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  opacity: 0.95;
+}
+
+/* Contact Section */
+.contact_section {
+  margin: 80px 0;
+  background: linear-gradient(135deg, #5bd262 0%, #78e87e 100%);
+  padding: 60px 0;
+  border-radius: 32px;
+  color: white;
+}
+
+.contact_content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.contact_info {
+  flex: 1;
+  padding-left: 60px;
+}
+
+.contact_text {
+  font-family: "Rubik";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 30px;
+}
+
+.phones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.phone_link {
+  font-family: "Rubik";
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #4f66cf;
+  background: white;
+  padding: 15px 30px;
+  border-radius: 24px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.phone_link:hover {
+  background: #4f66cf;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.work_hours {
+  font-family: "Rubik";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.messengers p {
+  font-family: "Rubik";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 15px;
+}
+
+.messenger_links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.messenger_link {
+  font-family: "Rubik";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.messenger_link:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.contact_image {
+  flex: 1;
+  padding-right: 60px;
+}
+
+.contact_image img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* CTA Section */
+.cta_section {
+  margin: 80px 0;
+  text-align: center;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #fc992c 0%, #ffb347 100%);
+  border-radius: 32px;
+}
+
+.cta_title {
+  font-family: "Rubik";
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 44px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero_section {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .hero_content,
+  .hero_image {
+    padding: 0;
+  }
+  
+  .main_title {
+    font-size: 48px;
+    line-height: 56px;
+  }
+  
+  .hero_text {
+    font-size: 18px;
+    line-height: 26px;
+  }
+  
+  .experience_content,
+  .contact_content {
+    flex-direction: column;
+  }
+  
+  .experience_text,
+  .experience_image,
+  .contact_info,
+  .contact_image {
+    padding: 0;
+  }
+  
+  .section_title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+  
+  .services_grid,
+  .values_grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .phones {
+    align-items: center;
+  }
+  
+  .phone_link {
+    text-align: center;
+  }
+  
+  .messenger_links {
+    justify-content: center;
+  }
+  
+  .cta_title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .hero_section,
+  .experience_section,
+  .contact_section,
+  .cta_section {
+    padding: 30px 15px;
+  }
+  
+  .service_card,
+  .value_card {
+    padding: 30px;
+  }
+  
+  .main_title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+  
+  .section_title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  
+  .phone_link {
+    font-size: 20px;
+    padding: 12px 20px;
+  }
+  
+  .cta_title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+} 
