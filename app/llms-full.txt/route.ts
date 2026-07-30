@@ -30,7 +30,7 @@ export async function GET() {
   lines.push('');
   lines.push(
     '> Live snapshot of every product, attraction and service Lovy Moment offers ' +
-      'for events in Lviv. Refreshed every 10 minutes from the production database.'
+    'for events in Lviv. Refreshed every 10 minutes from the production database.'
   );
   lines.push('');
   lines.push(`Generated: ${new Date().toISOString()}`);
@@ -80,7 +80,7 @@ export async function GET() {
   lines.push('- Телефон: +38 (097) 937 16 91, +38 (063) 860 49 66');
   lines.push('- Робочий час: щодня з 10:00 до 21:00');
   lines.push('- WhatsApp: https://wa.me/380979371691');
-  lines.push('- Telegram: https://t.me/+380979371691');
+  lines.push('- Telegram: https://t.me/+380638604966');
   lines.push('- Instagram: https://www.instagram.com/lovymomentlviv/');
   lines.push('');
 

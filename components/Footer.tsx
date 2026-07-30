@@ -47,7 +47,7 @@ export function Footer({ locale }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a href="https://t.me/pavluyk" rel="noopener noreferrer" target="_blank">
+                <a href="https://t.me/+380638604966" rel="noopener noreferrer" target="_blank">
                   <SvgSelectors id="telegram" />Telegram
                 </a>
               </li>

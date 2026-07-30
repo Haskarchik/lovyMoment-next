@@ -167,7 +167,7 @@ export default function AboutUsPageEn() {
                     Viber
                   </a>
                   <a
-                    href="https://t.me/+380979371691"
+                    href="https://t.me/+380638604966"
                     className={aboutUsStyles.messenger_link}
                     rel="noopener noreferrer"
                     target="_blank"

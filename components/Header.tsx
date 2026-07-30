@@ -60,7 +60,7 @@ export function Header({ locale, showHero = false, heroTitle, heroCta }: HeaderP
                 </a>
               </li>
               <li>
-                <a href="https://t.me/pavluyk" aria-label="Зв'язатися у Telegram" rel="noopener noreferrer" target="_blank">
+                <a href="https://t.me/+380638604966" aria-label="Зв'язатися у Telegram" rel="noopener noreferrer" target="_blank">
                   <SvgSelectors className={header.social_icon} id="telegram" />
                 </a>
               </li>
