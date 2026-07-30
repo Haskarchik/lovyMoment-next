@@ -87,7 +87,7 @@ const localBusinessLd = {
   description:
     'Організація яскравих свят у Львові та області. Атракціони, аніматори, ігри, кейтеринг.',
   url: SITE_URL,
-  telephone: '+380979371691',
+  telephone: '+380638604966',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Львів',

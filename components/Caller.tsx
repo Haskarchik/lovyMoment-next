@@ -8,7 +8,7 @@ import { SvgSelectors } from './SvgSelectors';
 
 export function Caller() {
   return (
-    <a className={callerStyle.mobile_call} href="tel:+380979371691" aria-label="Зателефонувати в Lovy Moment">
+    <a className={callerStyle.mobile_call} href="tel:+380638604966" aria-label="Зателефонувати в Lovy Moment">
       <SvgSelectors id="heandset" />
     </a>
   );

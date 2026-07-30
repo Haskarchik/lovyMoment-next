@@ -141,11 +141,11 @@ export default function AboutUsPageEn() {
                 For consultations or bookings, message or call:
               </p>
               <div className={aboutUsStyles.phones}>
-                <a href="tel:+380979371691" className={aboutUsStyles.phone_link}>
-                  ☎️ +38 (097) 937 16 91
-                </a>
                 <a href="tel:+380638604966" className={aboutUsStyles.phone_link}>
                   ☎️ +38 (063) 860 49 66
+                </a>
+                <a href="tel:+380979371691" className={aboutUsStyles.phone_link}>
+                  ☎️ +38 (097) 937 16 91
                 </a>
               </div>
               <p className={aboutUsStyles.work_hours}>Open every day from 10:00 to 21:00</p>

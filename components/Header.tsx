@@ -73,7 +73,7 @@ export function Header({ locale, showHero = false, heroTitle, heroCta }: HeaderP
 
             <div className={header.tel_number}>
               <SvgSelectors className={header.social_icon} id="heandset" />
-              <a href="tel:+380979371691">+38 (097) 937 16 91</a>
+              <a href="tel:+380638604966">+38 (063) 860 49 66</a>
             </div>
 
             {/*

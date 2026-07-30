@@ -25,8 +25,8 @@ export function Footer({ locale }: FooterProps) {
               {dict.footer.callUs} <span> {dict.footer.callUsHighlight} </span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <a href="tel:+380979371691" className="phone-number">+38 (097) 937 16 91</a>
               <a href="tel:+380638604966" className="phone-number">+38 (063) 860 49 66</a>
+              <a href="tel:+380979371691" className="phone-number">+38 (097) 937 16 91</a>
             </div>
             <div className="footer-info-text footer-text">
               {dict.footer.workingHours}
